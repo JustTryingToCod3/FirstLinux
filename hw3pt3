@@ -1,0 +1,27 @@
+#!/bin/bash
+
+#error checking
+exit_status=0
+
+#loops through argument input
+for arg in "$@"; do	
+	#check if file
+	if [ -f "$arg" ]; then
+		ls -li "$arg" #file details
+
+	# check if directory
+	elif [ -d "$arg" ]; then
+		ls -lid "$arg" #directory details
+
+	else
+		#if neither, increment error checker
+		exit_status=$((exit_status + 1))
+
+	fi
+done
+
+#Shows the user total errors
+echo "Exit Status - $exit_status"
+
+#Keeps track of total errors
+#exit $exit_status

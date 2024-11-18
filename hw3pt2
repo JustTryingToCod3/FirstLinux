@@ -1,0 +1,67 @@
+#!/bin/bash
+
+#Write a function that takes in one input
+
+if [ "$#" -ne 1 ]; then
+	echo "Error: Incorrect number of arguments."
+	exit 1
+fi
+
+#get the input number
+num=$1
+
+prime() {
+#Takes in a variable
+	
+	local num=$1
+	#if it is 1 or a negative number then it doesn't count so this excludes those
+	if [ "$num" -lt 2 ]; then
+		echo "$num is not a prime number"
+		return
+	fi
+
+	
+	local prime=1
+	#iterates to find any devisors
+	for ((i=2; i*i<=num; i++)); do	
+		if [ $((num % i)) -eq 0 ]; then 
+			prime=0
+			break
+		fi
+	done
+
+	#print the result
+	if [ $prime -eq 1 ]; then
+		echo "$num is a prime number"
+	else 
+		echo "$num is not a prime number"
+	fi
+
+}
+
+square() {
+#Takes a number as an input
+	local num=$1
+
+#Checks is the number is positive
+	if [ "$num" -lt 0 ]; then
+		echo "$num is not a perfect square"
+		return
+	fi
+
+
+	#test if any number squared is equal to the argument
+	for ((i=0; i*i<=num; i++)); do
+		if [ $((i * i)) -eq "$num" ]; then
+			echo "$num is a perfect square"
+			return
+		fi
+	done
+	
+	echo "$num is not a perfect square"
+
+}
+
+#call function
+prime "$num"
+square "$num"

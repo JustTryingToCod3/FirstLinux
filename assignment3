@@ -1,0 +1,61 @@
+#!/bin/bash
+
+#take in the arguments here
+
+#error chect first to make sure there are correct number of arguments and return status 1 if not
+if [ "$#" -ne 3 ]; then
+	echo "Error: Incorrect number of arguments."
+	exit 1
+fi
+
+#Variables that holds the input
+a=$1
+b=$2
+c=$3 #c is the operator
+
+#factorial function
+factorial() {
+	local num=$1
+	local fact=1
+# take in the arguments
+#calculate factorial
+	for ((i=2; i<=num; i++)); do 
+		fact=$((fact*i))
+	done
+#print value
+echo $fact
+}
+
+#multiplication function
+multiplication() {
+#takes in two numbers a, b
+#returns a, c, then b then = then the value
+echo "a x b = $((a * b))"
+}
+
+#exponent function
+exponent() {
+#Takes in two numbers and returns
+#takes in the operand
+#returns a, c, then b then = and then the value
+echo "a ^ b = $((a ** b))"
+}
+
+#if statement that checks
+#if the last argument is ^, then call exponent
+#if the last argument is x, then call  multiply
+#if the last argument is !, then call factorial
+if [ "$c" = "^" ]; then
+	exponent
+elif [ "$c" = "x" ]; then
+	multiplication
+elif [ "$c" = "!" ]; then 
+	factA=$(factorial "$a")
+	factB=$(factorial "$b")
+	echo "a! = $factA"
+	echo "b! = $factB"
+else
+#error check if the string does not match one of the three operators
+	echo "Sorry, invalid operand"
+	exit 1
+fi
